@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>МЯУР — котокафе, где кофе мурчит</title>
+<style>
+  /* === Базовые стили и палитра === */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #1a1410;
+    --bg-2: #2a221b;
+    --accent: #e8b87a;
+    --accent-hover: #f4cc94;
+    --text: #f5e6d3;
+    --muted: #a89582;
+  }
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+  /* === Шапка === */
+  header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 0; border-bottom: 1px solid #2a221b;
+  }
+  .logo { font-size: 28px; font-weight: bold; color: var(--accent); letter-spacing: 2px; }
+  .logo span { color: var(--text); }
+  nav ul { display: flex; gap: 30px; list-style: none; }
+  nav a {
+    color: var(--text); text-decoration: none; font-size: 15px;
+    transition: color 0.3s;
+  }
+  nav a:hover { color: var(--accent); }
+
+  /* === Главный экран === */
+  .hero {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+    align-items: center; padding: 80px 0;
+  }
+  .hero h1 {
+    font-size: 56px; line-height: 1.1; margin-bottom: 20px;
+    color: var(--accent);
+  }
+  .hero .slogan {
+    font-size: 22px; color: var(--muted); margin-bottom: 30px;
+    font-style: italic;
+  }
+  .btn {
+    display: inline-block; padding: 16px 36px;
+    background: var(--accent); color: var(--bg);
+    border: none; border-radius: 30px; font-size: 16px;
+    font-weight: bold; cursor: pointer; text-decoration: none;
+    transition: all 0.3s; box-shadow: 0 4px 20px rgba(232, 184, 122, 0.3);
+  }
+  .btn:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(232, 184, 122, 0.5);
+  }
+  .hero-img {
+    width: 100%; height: 400px;
+    background: url('cat.png') center/cover no-repeat, var(--bg-2);
+    border-radius: 20px;
+    border: 2px solid #2a221b;
+  }
+
+  /* === Секции === */
+  section { padding: 70px 0; }
+  .section-title {
+    text-align: center; font-size: 40px; color: var(--accent);
+    margin-bottom: 50px;
+  }
+
+  /* === Преимущества === */
+  .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+  .card {
+    background: var(--bg-2); padding: 35px 25px; border-radius: 20px;
+    text-align: center; transition: transform 0.3s, border-color 0.3s;
+    border: 1px solid transparent;
+  }
+  .card:hover { transform: translateY(-5px); border-color: var(--accent); }
+  .card .icon { font-size: 50px; margin-bottom: 15px; }
+  .card h3 { color: var(--accent); font-size: 20px; margin-bottom: 12px; }
+  .card p { color: var(--muted); font-size: 15px; }
+
+  /* === Цены === */
+  .prices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+  .price-card {
+    background: var(--bg-2); padding: 35px 25px; border-radius: 20px;
+    text-align: center; border: 2px solid transparent;
+    transition: all 0.3s;
+  }
+  .price-card.featured { border-color: var(--accent); transform: scale(1.03); }
+  .price-card h3 { color: var(--text); font-size: 22px; margin-bottom: 10px; }
+  .price {
+    font-size: 38px; color: var(--accent); font-weight: bold; margin: 15px 0;
+  }
+  .price small { font-size: 16px; color: var(--muted); }
+  .price-card ul { list-style: none; margin: 20px 0; text-align: left; }
+  .price-card li { padding: 8px 0; color: var(--muted); font-size: 14px; }
+  .price-card li::before { content: "🐾 "; }
+
+  /* === Отзывы === */
+  .reviews { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+  .review {
+    background: var(--bg-2); padding: 30px; border-radius: 20px;
+    border-left: 4px solid var(--accent);
+  }
+  .review p { font-style: italic; margin-bottom: 15px; color: var(--text); }
+  .review .author { color: var(--accent); font-weight: bold; font-size: 14px; }
+
+  /* === Подвал === */
+  footer {
+    background: #120d09; padding: 40px 0; margin-top: 40px;
+    text-align: center; border-top: 1px solid #2a221b;
+  }
+  .socials { margin: 20px 0; }
+  .socials a {
+    color: var(--accent); margin: 0 12px; text-decoration: none;
+    font-size: 15px; transition: color 0.3s;
+  }
+  .socials a:hover { color: var(--accent-hover); }
+  .copyright { color: var(--muted); font-size: 13px; }
+
+  /* === Адаптив === */
+  @media (max-width: 768px) {
+    .hero, .features, .prices, .reviews { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 38px; }
+    nav ul { gap: 15px; }
+    header { flex-direction: column; gap: 15px; }
+    .price-card.featured { transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Шапка сайта: логотип + навигация -->
+<header>
+  <div class="container" style="display:flex; justify-content:space-between; align-items:center; width:100%;">
+    <div class="logo">МЯУ<span>Р</span> 🐾</div>
+    <nav>
+      <ul>
+        <li><a href="#features">О нас</a></li>
+        <li><a href="#prices">Цены</a></li>
+        <li><a href="#reviews">Отзывы</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Главный экран: заголовок, слоган, кнопка и картинка -->
+<section class="hero">
+  <div class="container" style="display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center; width:100%;">
+    <div>
+      <h1>Кофе, который мурчит.</h1>
+      <p class="slogan">Коты, которые лечат. Заходи — у нас тепло, даже если за окном минус.</p>
+      <a href="#" class="btn" onclick="alert('Спасибо! Мы скоро свяжемся с вами 🐱'); return false;">Оставить заявку</a>
+    </div>
+    <!-- Картинка cat.png должна лежать рядом с index.html -->
+    <div class="hero-img"></div>
+  </div>
+</section>
+
+<!-- Блок «Почему мы» — три карточки преимуществ -->
+<section id="features">
+  <div class="container">
+    <h2 class="section-title">Почему именно мы?</h2>
+    <div class="features">
+      <div class="card">
+        <div class="icon">🐈</div>
+        <h3>12 котов из приюта</h3>
+        <p>Каждый из них ищет дом. Познакомься — и, может, именно ты станешь его человеком.</p>
+      </div>
+      <div class="card">
+        <div class="icon">☕</div>
+        <h3>Антистресс после школы</h3>
+        <p>Сделал контрольную? Приходи. Здесь можно выдохнуть, обнять кота и забыть про оценки.</p>
+      </div>
+      <div class="card">
+        <div class="icon">❤️</div>
+        <h3>Помогаем приюту</h3>
+        <p>Часть выручки идёт на корм и лечение. Твой латте — чья-то сытая миска.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Блок с тарифами и ценами -->
+<section id="prices" style="background: #120d09;">
+  <div class="container">
+    <h2 class="section-title">Тарифы</h2>
+    <div class="prices">
+      <div class="price-card">
+        <h3>Мур-час</h3>
+        <div class="price">250<small>₽</small></div>
+        <ul>
+          <li>1 час с котами</li>
+          <li>Чай или какао</li>
+          <li>Wi-Fi и розетки</li>
+        </ul>
+        <a href="#" class="btn" onclick="alert('Заявка принята!'); return false;">Выбрать</a>
+      </div>
+      <div class="price-card featured">
+        <h3>Мяу-день</h3>
+        <div class="price">900<small>₽</small></div>
+        <ul>
+          <li>Весь день без лимита</li>
+          <li>Любой напиток + десерт</li>
+          <li>Фотосессия с котами</li>
+        </ul>
+        <a href="#" class="btn" onclick="alert('Заявка принята!'); return false;">Выбрать</a>
+      </div>
+      <div class="price-card">
+        <h3>Семейный прайд</h3>
+        <div class="price">2200<small>₽</small></div>
+        <ul>
+          <li>До 4 человек</li>
+          <li>3 часа + угощения</li>
+          <li>Мастер-класс по уходу</li>
+        </ul>
+        <a href="#" class="btn" onclick="alert('Заявка принята!'); return false;">Выбрать</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Блок с отзывами целевой аудитории -->
+<section id="reviews">
+  <div class="container">
+    <h2 class="section-title">Что говорят гости</h2>
+    <div class="reviews">
+      <div class="review">
+        <p>«Пришла после контрольной по алгебре — вышла другим человеком. Рыжий Марсик уснул у меня на коленях, и я поняла: жизнь налажается.»</p>
+        <div class="author">— Алиса, 14 лет</div>
+      </div>
+      <div class="review">
+        <p>«Водим сюда детей каждые выходные. Они в восторге, мы отдыхаем. А ещё забрали домой черную кошечку — спасибо МЯУРу за новую членки семьи!»</p>
+        <div class="author">— Семья Ивановых</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Подвал: контакты, соцсети, копирайт -->
+<footer>
+  <div class="container">
+    <div class="logo" style="margin-bottom:10px;">МЯУ<span>Р</span> 🐾</div>
+    <p style="color: var(--muted); font-size: 14px;">ул. Кошачья, 7 · ежедневно 10:00–22:00 · +7 (999) 123-45-67</p>
+    <div class="socials">
+      <a href="#">Telegram</a>
+      <a href="#">VK</a>
+      <a href="#">Instagram</a>
+    </div>
+    <div class="copyright">© 2026 Котокафе «МЯУР». Все лапы защищены.</div>
+  </div>
+</footer>
+
+</body>
+</html>
